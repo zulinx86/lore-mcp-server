@@ -1,13 +1,17 @@
 # lore-mcp-server
 
 MCP server for searching and reading [lore.kernel.org](https://lore.kernel.org) mailing list archives.
-Built on [liblore](https://pypi.org/project/liblore/).
+
+No external dependencies beyond [FastMCP](https://gofastmcp.com) — all
+lore.kernel.org interactions use the standard library (`urllib`,
+`email`, `mailbox`).
 
 ## Tools
 
 ### lore_search
 
-Search lore.kernel.org using Xapian query syntax.
+Search lore.kernel.org using Xapian query syntax. Returns lightweight
+results (no message bodies) via the Atom feed API.
 
 ```
 lore_search(
@@ -18,6 +22,8 @@ lore_search(
 
 Supports public-inbox search prefixes: `bs:` (subject+body), `s:` (subject),
 `f:` (from), `d:` (date range), `dfn:` (diff filename), and more.
+
+Use `lore_get_message` to fetch the full content of a specific result.
 
 ### lore_get_message
 
@@ -42,7 +48,7 @@ headers and reply relationships (`in_reply_to`) for each message.
 Use this to get an overview of a large thread before fetching specific
 messages with `lore_get_message`.
 
-The underlying mbox data is cached, so subsequent calls to
+The underlying mbox data is cached in-memory, so subsequent calls to
 `lore_get_thread` or `lore_get_message` for the same thread are served
 from cache without additional network requests.
 
@@ -75,4 +81,4 @@ uv run lore-mcp-server
 
 ## License
 
-GPL-2.0-or-later
+Apache-2.0

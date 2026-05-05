@@ -3,11 +3,10 @@ name = "lore-mcp-server"
 version = "0.1.0"
 description = "MCP server for searching and reading lore.kernel.org mailing list archives"
 readme = "README.md"
-license = "GPL-2.0-or-later"
+license = "Apache-2.0"
 requires-python = ">=3.10"
 dependencies = [
-    "fastmcp>=2.0.0",
-    "liblore>=0.1.0",
+    "fastmcp>=3.0.0",
 ]
 
 [project.scripts]
